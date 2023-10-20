@@ -14,7 +14,12 @@ let app = Vue.createApp({
           carrots: 0,
           pineapples: 0,
           cherries: 0
-          },
+            },
+            price: {
+          carrots: .25,
+          pineapples: 0,
+          cherries: 0        
+        },
           things:[
               {thing:10,mynum:100},
               { thing: 20, mynum: 200 },
@@ -46,6 +51,7 @@ let app = Vue.createApp({
 })
   
 app.component('sidebar', {
+  props: ['toggle', 'cart', 'price' ], //toggle is a property that passes the function to show/hide the cart into the component.
     template: `
   <aside class="cart-container">
   <div class="cart">
@@ -54,7 +60,8 @@ app.component('sidebar', {
         Cart
         <i class="icofont-cart-alt icofont-1x"></i>
       </span>
-      <button @click="$root.sidebarVisible(0)" class="cart-close">&times;</button>
+   
+    <button @click="toggle(0)" class="cart-close">&times;</button>
     </h1>
 
     <div class="cart-body">
@@ -73,16 +80,16 @@ app.component('sidebar', {
           <tr>
             <td><i class="icofont-carrot icofont-3x"></i></td>
             <td>Carrot</td>
-            <td>$1.00</td>
-            <td class="center">1</td>
-            <td>$1.00</td>
+            <td>$ {{price.carrots}}</td>
+            <td class="center">{{cart.carrots}}</td>
+            <td>$$ {{ parseFloat(cart.carrots * price.carrots).toFixed(2)}}</td>
             <td class="center">
               <button class="btn btn-light cart-remove">
                 &times;
               </button>
             </td>                  
           </tr>
-          num: {{$root.cart.carrots}}
+          num: {{cart.carrots}}
         </tbody>
       </table>           
       <p class="center"><em>No items in cart</em></p>

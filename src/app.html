@@ -23,9 +23,9 @@
             <span>Past Orders</span>
           </a>
         </nav>
-        <a href="#" class="top-bar-cart-link">
+        <a href="#" class="top-bar-cart-link" @click="sidebarVisible(1)">
           <i class="icofont-cart-alt icofont-1x"></i>
-          <span>Cart (0)</span>
+          <span >Cart (0)</span>
         </a>
       </header>
 
@@ -77,8 +77,7 @@
             <div class="card-footer">
               <button @click="addToCart('carrots')" class="btn btn-light">
                 Add to cart
-              </button>
-              <button @click="sidebarVisible(1)" class="cart-close">&times;</button>
+              </button>              
             </div>
           </div>
 
@@ -162,8 +161,9 @@
 
       </main>
       
-      <sidebar v-if="showSidebar" />
-
+      <!-- :toggle is a vue variable used to pass showSidebar function from the parent into the component -->
+      <!-- inside the app.component, we added a props:['toggle'] to accept the toggle function -->
+      <sidebar v-if="showSidebar" :toggle = "sidebarVisible" :cart="cart" :price="price" /> 
       <footer>
       </footer>
 
